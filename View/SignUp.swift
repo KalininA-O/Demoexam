@@ -311,8 +311,8 @@ struct SignUp: View {
                         Image(.gool)
                     }
                     .padding(10)
-                }.navigationBarBackButtonHidden()
-            }}
+                }
+            }.navigationBarBackButtonHidden()}
     }
 
 #Preview {
