@@ -14,12 +14,15 @@ struct NewPassword: View {
     @State var boll:Bool=true
     @State var img: String = "eye.slash"
     @State var imgg: String = "eye.slash"
+    @StateObject var newpassViewModel = NewPassViewModel()
+    @State private var showingAlert = false
+    @State private var NavigationLogin: Bool = false
     var body: some View {
         NavigationView{
             
             VStack{
-                // NavigationLink(destination: NewPassword(), isActive: $NavigationNewPass)
-                //{EmptyView()}
+                 NavigationLink(destination: Login(), isActive: $NavigationLogin)
+                {EmptyView()}
                 HStack{
                     Text("New Password")
                         .padding(.leading, 10)
@@ -136,8 +139,45 @@ struct NewPassword: View {
                         }
                     }
                 }.padding(.top,-10)
+                HStack{
+                    Button(action:{
+                        if(pass == cpass)
+                        {
+                            newpassViewModel.newpassword()
+                            if(!newpassViewModel.error)
+                            {
+                                
+                                NavigationLogin.toggle()
+                            }
+                            else{
+                                self.showingAlert = true
+                            }
+                            
+                        }
+                        else
+                        {
+                            self.showingAlert = true
+                        }
+                        
+                    }){
+                        Text("Log in")
+                        
+                    }
+                    .background(Color.blun)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    .buttonStyle(MainButtonStyle(progress: newpassViewModel.isProgress))
+                    .alert(isPresented: $showingAlert) {
+                                Alert(title: Text("Error"),
+                                      message: Text("Incorrect password"),
+                                      dismissButton: .default(Text("OK")))
+                            }
+                    
+                }.padding(.top,20)
+                    .padding(10)
+                
             }
-        }
+        }.navigationBarBackButtonHidden()
     }
 }
 

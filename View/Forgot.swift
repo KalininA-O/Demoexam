@@ -81,11 +81,9 @@ struct Forgot: View {
                             Text("Send OTP")
                             
                         }
-                        .frame(width: 350, height: 30)
-                        .padding(10)
                         .background(Color.blun)
                         .foregroundColor(.white)
-                        .cornerRadius(10)
+                        .cornerRadius(5)
                         .alert(isPresented: $showingAlert) {
                                     Alert(title: Text("Error"),
                                           message: Text("Incorrect login"),
@@ -100,10 +98,11 @@ struct Forgot: View {
                             
                         }
                         .frame(width: 350, height: 30)
+                        .font(.custom("Roboto-black",size:14))
                         .padding(10)
                         .background(Color.gr)
                         .foregroundColor(.white)
-                        .cornerRadius(10)
+                        .cornerRadius(5)
                     }
                     
                 }.padding(.top,40)

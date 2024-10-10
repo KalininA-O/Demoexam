@@ -158,7 +158,7 @@ struct SignUp: View {
                                 }
                             }
                         }
-                    }
+                    }.padding(.top, -10)
                     HStack{
                         Text("Confirm Password")
                             .padding(.leading,10)
@@ -208,7 +208,7 @@ struct SignUp: View {
                             }
                         }
                         
-                    }
+                    }.padding(.top, -10)
                     HStack{
                         
                         Custom(value: $checkBox, valueColor: $col)
@@ -225,7 +225,7 @@ struct SignUp: View {
                         }
                     }
                     HStack{
-                        if  checkBox{
+                        if checkBox{
                             Button(action:{
                                 login = userViewModel.user.name
                                 num = userViewModel.user.phone_number
@@ -256,14 +256,12 @@ struct SignUp: View {
                                 }
                                 
                             }){
-                                Text("Sing in")
+                                Text("Sing Up")
                                 
                             }
-                            .frame(width: 300, height: 30)
-                            .padding(10)
                             .background(Color.blun)
                             .foregroundColor(.white)
-                            .cornerRadius(10)
+                            .cornerRadius(5)
                             .alert(isPresented: $showingAlert) {
                                         Alert(title: Text("Error"),
                                               message: Text("Password do not match"),
@@ -278,14 +276,15 @@ struct SignUp: View {
                         }
                             else{
                                 Button(action:{}){
-                                    Text("Sing in")
+                                    Text("Sing Up")
                                     
                                 }
-                                .frame(width: 300, height: 30)
+                                .frame(width: 350, height: 30)
+                                .font(.custom("Roboto-black",size:14))
                                 .padding(10)
-                                .background(Color.gr)
+                                .background(Color.gray)
                                 .foregroundColor(.white)
-                                .cornerRadius(10)
+                                .cornerRadius(5)
                             }
                         }.padding(.top,40)
                         HStack{
@@ -312,7 +311,7 @@ struct SignUp: View {
                         Image(.gool)
                     }
                     .padding(10)
-                }
+                }.navigationBarBackButtonHidden()
             }}
     }
 

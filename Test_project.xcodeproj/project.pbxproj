@@ -11,6 +11,7 @@
 		CE467A6D2CB77012006C0203 /* OTPview.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE467A6C2CB77012006C0203 /* OTPview.swift */; };
 		CE467A6F2CB779E5006C0203 /* OTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE467A6E2CB779E5006C0203 /* OTPViewModel.swift */; };
 		CE467A712CB78180006C0203 /* NewPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE467A702CB78180006C0203 /* NewPassword.swift */; };
+		CE467A732CB79183006C0203 /* NewPassViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE467A722CB79183006C0203 /* NewPassViewModel.swift */; };
 		CE5427332CB4DF4100DDA635 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5427322CB4DF4100DDA635 /* Login.swift */; };
 		CE5427352CB4E0F100DDA635 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5427342CB4E0F100DDA635 /* Home.swift */; };
 		CE5427372CB4F19600DDA635 /* Forgot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5427362CB4F19600DDA635 /* Forgot.swift */; };
@@ -59,6 +60,7 @@
 		CE467A6C2CB77012006C0203 /* OTPview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPview.swift; sourceTree = "<group>"; };
 		CE467A6E2CB779E5006C0203 /* OTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewModel.swift; sourceTree = "<group>"; };
 		CE467A702CB78180006C0203 /* NewPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPassword.swift; sourceTree = "<group>"; };
+		CE467A722CB79183006C0203 /* NewPassViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPassViewModel.swift; sourceTree = "<group>"; };
 		CE5427322CB4DF4100DDA635 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		CE5427342CB4E0F100DDA635 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		CE5427362CB4F19600DDA635 /* Forgot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forgot.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 		CE913AF32CB61FB200C71B70 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CE913AF12CB61D2900C71B70 /* Supabase.swift */,
 				CE913AF42CB61FDE00C71B70 /* UserModel.swift */,
 				CE913AF92CB6203900C71B70 /* Repositories.swift */,
 			);
@@ -198,6 +201,7 @@
 				CE913AFC2CB63B1600C71B70 /* AuthViewModel.swift */,
 				CE467A6A2CB76E52006C0203 /* ForgetViewModel.swift */,
 				CE467A6E2CB779E5006C0203 /* OTPViewModel.swift */,
+				CE467A722CB79183006C0203 /* NewPassViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -208,7 +212,6 @@
 				CE913AFE2CB6569400C71B70 /* MainButtonStyle.swift */,
 				CEA6A82C2CB3B0B600C52488 /* Custom.swift */,
 				CE842CFD2CB38CA4003532B4 /* SignUp.swift */,
-				CE913AF12CB61D2900C71B70 /* Supabase.swift */,
 				CE5427362CB4F19600DDA635 /* Forgot.swift */,
 				CE5427322CB4DF4100DDA635 /* Login.swift */,
 				CE5427342CB4E0F100DDA635 /* Home.swift */,
@@ -376,6 +379,7 @@
 				CE467A6F2CB779E5006C0203 /* OTPViewModel.swift in Sources */,
 				CE5427352CB4E0F100DDA635 /* Home.swift in Sources */,
 				CE913AF22CB61D2900C71B70 /* Supabase.swift in Sources */,
+				CE467A732CB79183006C0203 /* NewPassViewModel.swift in Sources */,
 				CE5427332CB4DF4100DDA635 /* Login.swift in Sources */,
 				CE467A712CB78180006C0203 /* NewPassword.swift in Sources */,
 				CE467A6D2CB77012006C0203 /* OTPview.swift in Sources */,

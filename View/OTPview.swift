@@ -91,11 +91,9 @@ struct OTPview: View {
                             Text("Set New Password")
                             
                         }
-                        .frame(width: 350, height: 30)
-                        .padding(10)
                         .background(Color.blun)
                         .foregroundColor(.white)
-                        .cornerRadius(10)
+                        .cornerRadius(5)
                         .alert(isPresented: $showingAlert) {
                             Alert(title: Text("Error"),
                                   message: Text("Error supabase"),
@@ -110,13 +108,15 @@ struct OTPview: View {
                             Text("Set New Password")
                             
                         }
+                        .font(.custom("Roboto-black",size:14))
                         .frame(width: 350, height: 30)
                         .padding(10)
                         .background(Color.gr)
                         .foregroundColor(.white)
-                        .cornerRadius(10)
+                        .cornerRadius(5)
                     }
                 }.padding(.top,30)
+                    .padding(10)
             }
             }.navigationBarHidden(true)
                 .onReceive(timer, perform: { _ in
@@ -133,6 +133,7 @@ struct OTPview: View {
                     
                     self.buttonDisabled = disabled
                 }
+                .navigationBarBackButtonHidden()
         
         
     }

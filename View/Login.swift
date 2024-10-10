@@ -16,12 +16,12 @@ struct Login: View {
     @State private var showingAlert = false
     @State var col: Color = Color.gray
     @State private var checkBox: Bool = false
-    @State var login: String = "***********@mail.com"
     @State var img: String = "eye.slash"
     @State var bol:Bool=true
     @State var changeEmail:Bool=false
-    @State var pass: String = "***********"
+    @AppStorage("password") var savepassword: String = "******"
     var body: some View {
+        
         NavigationView{
             VStack{
                 NavigationLink(destination: Home(), isActive: $NavigationHome)
@@ -110,11 +110,11 @@ struct Login: View {
                             }
                         }
                     }
-                }
+                }.padding(.top, -10)
                 HStack{
                     
                     Custom(value: $checkBox, valueColor: $col)
-                        .padding(.leading, -10)
+                        .padding(.leading, 0)
                     ZStack{
                         Text("Remember password                                                                                            ")
                         
@@ -124,19 +124,21 @@ struct Login: View {
                             .foregroundColor(.blun)
                             .font(.custom("Roboto-black",size:10))
                         Spacer()
-                    }
+                    }.padding(.leading, 5)
                 }
                 HStack{
                     if(changeEmail)
                     {
                         Button(action:{
-                            //NavigationHome.toggle()
-                            if(login != "" && pass != "")
+                            if(authViewModel.login != "" && authViewModel.password != "")
                             {
                                 authViewModel.signIn()
                                 if(!authViewModel.error)
                                 {
-                                    
+                                    if(checkBox)
+                                    {
+                                        self.savepassword = authViewModel.password
+                                    }
                                     NavigationHome.toggle()
                                 }
                                 else{
@@ -153,17 +155,16 @@ struct Login: View {
                             Text("Log in")
                             
                         }
-                        .frame(width: 300, height: 30)
-                        .padding(10)
                         .background(Color.blun)
                         .foregroundColor(.white)
-                        .cornerRadius(10)
+                        .cornerRadius(5)
                         .alert(isPresented: $showingAlert) {
                                     Alert(title: Text("Error"),
                                           message: Text("Incorrect login or password"),
                                           dismissButton: .default(Text("OK")))
                                 }
                         .buttonStyle(MainButtonStyle(progress: authViewModel.isProgress))
+                        
 
                     }
                     else{
@@ -171,14 +172,16 @@ struct Login: View {
                             Text("Log in")
                             
                         }
-                        .frame(width: 300, height: 30)
+                        .font(.custom("Roboto-black",size:14))
+                        .frame(width: 350, height: 30)
                         .padding(10)
                         .background(Color.gr)
                         .foregroundColor(.white)
-                        .cornerRadius(10)
+                        .cornerRadius(5)
+                        
                     }
                     
-                }.padding(.top,40)
+                }.padding(.top,100)
                 HStack{
                     ZStack{
                         
@@ -196,16 +199,19 @@ struct Login: View {
                 
                 
                 HStack{
-                    Text("or sign in using")
+                    Text("or log in using")
                         .foregroundColor(.gray)
                         .font(.custom("Roboto-black",size:10))
                 }
-                Image(.gool)
+                Image(.gool).frame(width: 10, height: 30)
             }
             .padding(10)
             
             
         }.navigationBarBackButtonHidden()
+            .onAppear(){
+                authViewModel.password = self.savepassword
+            }
     }
 }
     
