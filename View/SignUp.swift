@@ -11,7 +11,6 @@ import Foundation
 struct SignUp: View {
     @StateObject var userViewModel = UserViewModel()
     @State private var showingAlert = false
-    @State private var showingAlerts = false
     @State private var NavigationHome: Bool = false
     @State private var checkBox: Bool = false
     @State var img: String = "eye.slash"
@@ -19,15 +18,10 @@ struct SignUp: View {
     @State var col: Color = Color.blun
     @State var bol:Bool=true
     @State var boll:Bool=true
-    @State var login: String = ""
-    @State var num: String = ""
-    @State var mail: String = ""
-    @State var pass: String = ""
-    @State var cpass: String = ""
     var body: some View {
         NavigationView{
             ZStack{
-                NavigationLink(destination: Home(), isActive: $NavigationHome)
+                NavigationLink(destination: Home(), isActive: $userViewModel.isNavigate)
                 {EmptyView()}
                 Color.white.edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                 VStack {
@@ -36,9 +30,9 @@ struct SignUp: View {
                             .padding(.leading, 10)
                         
                             .font(.custom("Roboto-black",size:20))
-                            .alert(isPresented: $showingAlerts) {
+                            .alert(isPresented: $userViewModel.error) {
                                         Alert(title: Text("Error"),
-                                              message: Text("Invalid input fields"),
+                                              message: Text("Invalid input"),
                                               dismissButton: .default(Text("OK")))
                                     }
                         
@@ -227,31 +221,16 @@ struct SignUp: View {
                     HStack{
                         if checkBox{
                             Button(action:{
-                                login = userViewModel.user.name
-                                num = userViewModel.user.phone_number
-                                mail = userViewModel.email
-                                pass = userViewModel.password
-                                cpass = userViewModel.confirmPassword
-                                
-                                    if(pass == cpass)
+                                if(userViewModel.password == userViewModel.confirmPassword)
                                     {
-                                        userViewModel.signUp()
-                                        if(!userViewModel.error)
-                                        {
-                                            
-                                            
-                                        NavigationHome.toggle()
-                                            
-                                        
-                                    }
-                                    else{
-                                        
-                                        self.showingAlert = true
-                                        
-                                    }
+                                        Task{
+                                            do{
+                                                userViewModel.signUp()
+                                            }
+                                        }
                                 }
                                 else{
-                                    self.showingAlerts = true
+                                    self.showingAlert = true
                                     
                                 }
                                 
@@ -313,7 +292,9 @@ struct SignUp: View {
                     .padding(10)
                 }
             }.navigationBarBackButtonHidden()}
+  
     }
+
 
 #Preview {
     SignUp()

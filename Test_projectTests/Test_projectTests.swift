@@ -32,5 +32,21 @@ final class Test_projectTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+
+
+    
+    func test_Supa(){
+        let viewModel = Supabool()
+
+        XCTAssertTrue(viewModel)
+
+            
+        
+        
+    }
+
+    
 
 }
+

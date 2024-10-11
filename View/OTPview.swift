@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OTPview: View {
     @State private var NavigationNewPass: Bool = false
-    @StateObject var forgetViewModel = ForgetViewModel()
+    @ObservedObject var forgetViewModel : ForgetViewModel
     @StateObject var otpViewModel = OTPViewModel()
     @State private var showingAlert = false
     @State private var code: [String] = Array(repeating: "", count: 6)
@@ -21,7 +21,7 @@ struct OTPview: View {
         NavigationView{
             
             VStack{
-                NavigationLink(destination: NewPassword(), isActive: $NavigationNewPass)
+                NavigationLink(destination: NewPassword(), isActive: $otpViewModel.isNavigate)
                 {EmptyView()}
                 HStack{
                     Text("OTP Verification")
@@ -75,13 +75,6 @@ struct OTPview: View {
                             if(code.joined() != "")
                             {
                                 otpViewModel.send()
-                                if(!otpViewModel.error)
-                                {
-                                    NavigationNewPass.toggle()
-                                }
-                                else{
-                                    self.showingAlert = true
-                                }
                             }
                             else{
                                 self.showingAlert = true
@@ -94,7 +87,7 @@ struct OTPview: View {
                         .background(Color.blun)
                         .foregroundColor(.white)
                         .cornerRadius(5)
-                        .alert(isPresented: $showingAlert) {
+                        .alert(isPresented: $otpViewModel.error) {
                             Alert(title: Text("Error"),
                                   message: Text("Error supabase"),
                                   dismissButton: .default(Text("OK")))
@@ -158,5 +151,5 @@ struct OTPview: View {
 }
 
 #Preview {
-    OTPview()
+    OTPview(forgetViewModel: ForgetViewModel())
 }

@@ -11,13 +11,12 @@ struct Forgot: View {
     @State private var NavigationOTP: Bool = false
     @State private var showingAlert = false
     @StateObject var forgetViewModel = ForgetViewModel()
-    @State var login: String = "***********@mail.com"
     @State var changeEmail:Bool=false
     var body: some View {
         NavigationView{
             
             VStack{
-                NavigationLink(destination: OTPview(), isActive: $NavigationOTP)
+                NavigationLink(destination: OTPview(forgetViewModel: forgetViewModel), isActive: $forgetViewModel.isNavigate)
                 {EmptyView()}
                 HStack{
                     Text("Forgot Password")
@@ -60,22 +59,8 @@ struct Forgot: View {
                     {
                         Button(action:{
                             
-                            if(login != "")
-                            {
                                 forgetViewModel.send()
-                                if(!forgetViewModel.error)
-                                {
-                                    NavigationOTP.toggle()
-                                }
-                                else
-                                {
-                                    self.showingAlert = true
-                                }
-                            }
-                            else
-                            {
-                                self.showingAlert = true
-                            }
+                                
                             
                         }){
                             Text("Send OTP")
@@ -84,7 +69,8 @@ struct Forgot: View {
                         .background(Color.blun)
                         .foregroundColor(.white)
                         .cornerRadius(5)
-                        .alert(isPresented: $showingAlert) {
+                        .padding(10)
+                        .alert(isPresented: $forgetViewModel.error) {
                                     Alert(title: Text("Error"),
                                           message: Text("Incorrect login"),
                                           dismissButton: .default(Text("OK")))
@@ -120,9 +106,10 @@ struct Forgot: View {
                         Spacer()
                     }
                 }.padding(10)
-            }.navigationBarBackButtonHidden()
-        }
+            }
+        }.navigationBarBackButtonHidden()
     }
+
 }
 
 #Preview {

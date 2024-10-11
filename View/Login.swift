@@ -24,7 +24,7 @@ struct Login: View {
         
         NavigationView{
             VStack{
-                NavigationLink(destination: Home(), isActive: $NavigationHome)
+                NavigationLink(destination: Home(), isActive: $authViewModel.isNavigate)
                 {EmptyView()}
                 HStack{
                     Text("Welcome Back")
@@ -130,26 +130,21 @@ struct Login: View {
                     if(changeEmail)
                     {
                         Button(action:{
-                            if(authViewModel.login != "" && authViewModel.password != "")
-                            {
-                                authViewModel.signIn()
-                                if(!authViewModel.error)
-                                {
-                                    if(checkBox)
-                                    {
-                                        self.savepassword = authViewModel.password
+                            
+                            
+                                Task{
+                                    do{
+                                        if(checkBox)
+                                        {
+                                            self.savepassword = authViewModel.password
+                                        }
+                                        authViewModel.signIn()
+                                        
                                     }
-                                    NavigationHome.toggle()
-                                }
-                                else{
-                                    self.showingAlert = true
+                                   
+                                    
                                 }
                                 
-                            }
-                            else
-                            {
-                                self.showingAlert = true
-                            }
                             
                         }){
                             Text("Log in")
@@ -158,9 +153,9 @@ struct Login: View {
                         .background(Color.blun)
                         .foregroundColor(.white)
                         .cornerRadius(5)
-                        .alert(isPresented: $showingAlert) {
+                        .alert(isPresented: $authViewModel.error) {
                                     Alert(title: Text("Error"),
-                                          message: Text("Incorrect login or password"),
+                                          message: Text("Invalid login or password"),
                                           dismissButton: .default(Text("OK")))
                                 }
                         .buttonStyle(MainButtonStyle(progress: authViewModel.isProgress))
@@ -213,6 +208,8 @@ struct Login: View {
                 authViewModel.password = self.savepassword
             }
     }
+
+    
 }
     
 

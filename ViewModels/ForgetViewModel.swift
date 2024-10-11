@@ -16,7 +16,7 @@ class ForgetViewModel: ObservableObject{
         @Published var isNavigate: Bool = false
         @Published  var error: Bool = false
         
-        func send() {
+        func send(){
             Task {
                 do {
                     await MainActor.run {

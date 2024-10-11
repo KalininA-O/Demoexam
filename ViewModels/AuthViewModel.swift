@@ -14,10 +14,10 @@ class AuthViewModel: ObservableObject{
         @Published  var password: String = "**********"
         
         @Published  var isProgress: Bool = false
-        @Published var isNavigate: Bool = false
+        @Published  var isNavigate: Bool = false
         @Published  var error: Bool = false
         
-        func signIn() {
+        func signIn(){
             Task {
                 do {
                     await MainActor.run {
@@ -30,6 +30,7 @@ class AuthViewModel: ObservableObject{
                         self.isProgress = false
                     }
                     
+                    
                 } catch {
                     print(error.localizedDescription)
                     await MainActor.run {
@@ -37,7 +38,11 @@ class AuthViewModel: ObservableObject{
                         self.isProgress = false
                     }
                 }
+                
+                
             }
+            
+            
                     }
 
 }

@@ -21,7 +21,7 @@ struct NewPassword: View {
         NavigationView{
             
             VStack{
-                 NavigationLink(destination: Login(), isActive: $NavigationLogin)
+                NavigationLink(destination: Login(), isActive: $newpassViewModel.isNavigate)
                 {EmptyView()}
                 HStack{
                     Text("New Password")
@@ -143,20 +143,12 @@ struct NewPassword: View {
                     Button(action:{
                         if(pass == cpass)
                         {
+                            newpassViewModel.password = pass
                             newpassViewModel.newpassword()
-                            if(!newpassViewModel.error)
-                            {
-                                
-                                NavigationLogin.toggle()
-                            }
-                            else{
-                                self.showingAlert = true
-                            }
-                            
                         }
                         else
                         {
-                            self.showingAlert = true
+                            newpassViewModel.error = true
                         }
                         
                     }){
@@ -167,7 +159,7 @@ struct NewPassword: View {
                     .foregroundColor(.white)
                     .cornerRadius(10)
                     .buttonStyle(MainButtonStyle(progress: newpassViewModel.isProgress))
-                    .alert(isPresented: $showingAlert) {
+                    .alert(isPresented: $newpassViewModel.error) {
                                 Alert(title: Text("Error"),
                                       message: Text("Incorrect password"),
                                       dismissButton: .default(Text("OK")))
